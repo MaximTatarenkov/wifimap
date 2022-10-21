@@ -7,22 +7,24 @@ from tasks.fifth_task import FifthTask
 
 if __name__=="__main__":
     client_id = 221322
-    first_task = FirstTask(client_id)
+    hotspots_file = "hotspots"
+    conns_file = "conns"
+    first_task = FirstTask(client_id, hotspots_file)
     hotspots = first_task.get_hotspots()
     print(f"Пользователь создал WiFi точек: {hotspots}")
 
-    second_task = SecondTask(client_id)
+    second_task = SecondTask(client_id, hotspots_file)
     hotspots_with_place = second_task.get_count_hotspots_with_place()
     print(f"WiFi точек с привязкой к месту: {hotspots_with_place}")
 
-    third_task = ThirdTask(client_id)
+    third_task = ThirdTask(client_id, hotspots_file)
     hotposts_count = third_task.get_hotposts_last_month_week()
     last_month_hotposts_count = hotposts_count.last_month
     last_week_hotposts_count = hotposts_count.last_week
     print(f"Создано WiFi точек за последний месяц: {last_month_hotposts_count}")
     print(f"Создано WiFi точек за последнюю неделю: {last_week_hotposts_count}")
 
-    fourth_task = FourthTask(client_id)
+    fourth_task = FourthTask(client_id, hotspots_file)
     hotposts_count = fourth_task.get_hotspots_quality()
     good_hotposts = hotposts_count.good
     medium_hotposts = hotposts_count.medium
@@ -31,7 +33,7 @@ if __name__=="__main__":
     print(f"Средних WiFi точек: {medium_hotposts}")
     print(f"Плохих WiFi точек: {bad_hotposts}")
 
-    fifth_task = FifthTask(client_id)
+    fifth_task = FifthTask(client_id, hotspots_file, conns_file)
     conns_count = fifth_task.get_unique_conns()
     all_time_conns = conns_count.all_time
     year_conns = conns_count.year

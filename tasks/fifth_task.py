@@ -3,12 +3,14 @@ from collections import namedtuple
 
 from data.data import CsvLoader
 from .third_task import DATE_WITHOUT_LAST_YEAR, DATE_WITHOUT_LAST_MONTH, DATE_WITHOUT_LAST_WEEK
+from .first_task import FirstTask
 
 
-class FifthTask():
+class FifthTask(FirstTask):
 
-    def __init__(self, client_id) -> None:
-        self.client_id = client_id
+    def __init__(self, client_id, hotspots_file, conns_file) -> None:
+        super().__init__(client_id, hotspots_file)
+        self.conns_file = conns_file
 
 
     def get_conns_count(self, hotposts):
@@ -27,8 +29,8 @@ class FifthTask():
 
 
     def get_unique_conns(self):
-        hotspots = CsvLoader.load("hotspots")
-        conns = CsvLoader.load("conns")
+        hotspots = CsvLoader.load(self.hotspots_file)
+        conns = CsvLoader.load(self.conns_file)
         client_hotspots = hotspots.id[hotspots.owner_id == self.client_id]
         unique_client_cons = []
         unique_client_cons_with_date = []
